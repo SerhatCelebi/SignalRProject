@@ -39,7 +39,7 @@ namespace SignalRApi.Controllers
             _discountService.TAdd(discount);
             return Ok("Discount Kısmı Başarılı Bir Şekilde Eklendi.");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
@@ -60,7 +60,7 @@ namespace SignalRApi.Controllers
             _discountService.TUpdate(discount);
             return Ok("Discount Alanı Güncellendi");
         }
-        [HttpGet("GetDiscount")]
+        [HttpGet("{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
