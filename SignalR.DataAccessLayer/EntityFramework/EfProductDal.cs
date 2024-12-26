@@ -19,9 +19,89 @@ namespace SignalR.DataAccessLayer.EntityFramework
 
         public List<Product> GetProductsWithCategories()
         {
-            var context=new SignalRContext();
-            var values=context.Products.Include(x=>x.Category).ToList();
+            using var context = new SignalRContext();
+            var values = context.Products.Include(x => x.Category).ToList();
             return values;
         }
+
+        public decimal ProductAvgPriceByCategoryNameHamburger()
+        {
+            using var context = new SignalRContext();
+            return context.Products
+            .Where(p => p.Category.CategoryName == "Hamburger") 
+            .Average(p => p.Price);
+
+
+
+        }
+
+        public string ProductByMaxPrice()
+        {
+            using var context = new SignalRContext();
+            var result = context.Products
+           .Where(x => x.Price == context.Products
+           .Max(y => y.Price))
+           .Select(z => new { z.ProductName, Price = z.Price.ToString() })
+           .FirstOrDefault();
+
+            if (result != null)
+            {
+                return $"Product Name: {result.ProductName}, Price: {result.Price}";
+            }
+
+            return "No product found with minimum price.";
+        }
+        public string ProductByMinPrice()
+        {
+            using var context = new SignalRContext();
+            var result = context.Products
+            .Where(x => x.Price == context.Products
+            .Min(y => y.Price))
+            .Select(z => new { z.ProductName, Price = z.Price
+            .ToString() })
+            .FirstOrDefault();
+
+            if (result != null)
+            {
+                return $"Product Name: {result.ProductName}, Price: {result.Price}";
+            }
+
+            return "Ürün Bulunamadı.";
+        
     }
+
+    public int ProductCount()
+    {
+        using var context = new SignalRContext();
+        return context.Products.Count();
+    }
+
+    public int ProductCountByCategoryNameDrink()
+    {
+        using var context = new SignalRContext();
+        return context.Products
+            .Where(x => x.CategoryID == (context.Categories
+            .Where(y => y.CategoryName == "Hamburger")
+            .Select(z => z.CategoryID)
+            .FirstOrDefault()))
+            .Count();
+    }
+
+    public int ProductCountByCategoryNameHamburger()
+    {
+        using var context = new SignalRContext();
+        return context.Products
+            .Where(x => x.CategoryID == (context.Categories
+            .Where(y => y.CategoryName == "Icecek")
+            .Select(z => z.CategoryID)
+            .FirstOrDefault()))
+            .Count();
+    }
+
+    public decimal ProductPriceAvg()
+    {
+        using var context = new SignalRContext();
+        return context.Products.Average(x => x.Price);
+    }
+}
 }
