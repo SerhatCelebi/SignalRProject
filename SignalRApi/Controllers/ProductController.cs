@@ -15,10 +15,10 @@ namespace SignalRApi.Controllers
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService,IMapper mapper)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
-            _mapper=mapper;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult ProductList()
@@ -27,9 +27,45 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
         [HttpGet("ProductListWithCategory")]
-        public IActionResult ProductListWithCategory() {
-            var value=_mapper.Map<List<ResultProductWithCategoryDto>>(_productService.TGetProductsWithCategories());
+        public IActionResult ProductListWithCategory()
+        {
+            var value = _mapper.Map<List<ResultProductWithCategoryDto>>(_productService.TGetProductsWithCategories());
             return Ok(value);
+        }
+        [HttpGet("ProductCount")]
+        public IActionResult ProductCount()
+        {
+            return Ok(_productService.TProductCount());
+        }
+        [HttpGet("ProductCountByCategoryNameHamburger")]
+        public IActionResult ProductCountByCategoryNameHamburger()
+        {
+            return Ok(_productService.TProductCountByCategoryNameHamburger());
+        }
+        [HttpGet("ProductCountByCategoryNameDrink")]
+        public IActionResult ProductCountByCategoryNameDrink()
+        {
+            return Ok(_productService.TProductCountByCategoryNameDrink());
+        }
+        [HttpGet("ProductPriceAvg")]
+        public IActionResult ProductPriceAvg()
+        {
+            return Ok(_productService.TProductPriveAvg());
+        }
+        [HttpGet("ProductAvgPriceByCategoryNameHamburger")]
+        public IActionResult ProductAvgPriceByCategoryNameHamburger()
+        {
+            return Ok(_productService.TProductAvgPriceByCategoryNameHamburger());
+        }
+        [HttpGet("ProductByMaxPrice")]
+        public IActionResult ProductByMaxPrice()
+        {
+            return Ok(_productService.TProductByMaxPrice());
+        }
+        [HttpGet("ProductByMinPrice")]
+        public IActionResult ProductByMinPrice()
+        {
+            return Ok(_productService.TProductByMinPrice());
         }
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
@@ -58,14 +94,14 @@ namespace SignalRApi.Controllers
         {
             Product product = new Product()
             {
-                ProductID=updateProductDto.ProductID,
+                ProductID = updateProductDto.ProductID,
                 Description = updateProductDto.Description,
                 Price = updateProductDto.Price,
                 ImageUrl = updateProductDto.ImageUrl,
                 ProductName = updateProductDto.ProductName,
                 ProductStatus = updateProductDto.ProductStatus,
-				CategoryID = updateProductDto.CategoryID,
-			};
+                CategoryID = updateProductDto.CategoryID,
+            };
             _productService.TUpdate(product);
             return Ok("Product Alanı Güncellendi");
         }

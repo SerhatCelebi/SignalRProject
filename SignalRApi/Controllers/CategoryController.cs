@@ -15,7 +15,7 @@ namespace SignalRApi.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService,IMapper mapper)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
@@ -25,6 +25,21 @@ namespace SignalRApi.Controllers
         {
             var values = _mapper.Map<List<ResultCategoryDto>>(_categoryService.TGetListAll());
             return Ok(values);
+        }
+        [HttpGet("CategoryCount")]
+        public IActionResult CategoryCount()
+        {
+            return Ok(_categoryService.TCategoryCount());
+        }
+        [HttpGet("ActiveCategoryCount")]
+        public IActionResult ActiveCategoryCount()
+        {
+            return Ok(_categoryService.TActiveCategoryCount());
+        }
+        [HttpGet("PassiveCategoryCount")]
+        public IActionResult PassiveCategoryCount()
+        {
+            return Ok(_categoryService.TPassiveCategoryCount());
         }
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
@@ -49,9 +64,9 @@ namespace SignalRApi.Controllers
         {
             Category category = new Category()
             {
-				CategoryID = updateCategoryDto.CategoryID,
-				Status = updateCategoryDto.Status,
-                CategoryName=updateCategoryDto.CategoryName,
+                CategoryID = updateCategoryDto.CategoryID,
+                Status = updateCategoryDto.Status,
+                CategoryName = updateCategoryDto.CategoryName,
             };
             _categoryService.TUpdate(category);
             return Ok("Category Alanı Güncellendi");
@@ -62,6 +77,6 @@ namespace SignalRApi.Controllers
             var value = _categoryService.TGetByID(id);
             return Ok(value);
         }
-       
+
     }
 }
