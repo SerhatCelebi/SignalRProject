@@ -44,6 +44,15 @@ namespace SignalR.DataAccessLayer.EntityFramework
             return "Son sipariş yok.";
         }
 
+        public decimal TodayTotalPrice()
+        {
+            using var context = new SignalRContext();
+            var today = DateTime.Now.Date;
+            return context.Orders
+                .Where(x => x.Date.Date == today)
+                .Sum(y => y.TotalPrice);
+        }
+
         public int TotalOrderCount()
         {
             using var context = new SignalRContext();
