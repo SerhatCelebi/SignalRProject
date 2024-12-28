@@ -19,5 +19,15 @@ namespace SignalRApi.Controllers
         {
             return Ok(_menuTableService.TMenuTableCount());
         }
+        [HttpGet("ActiveMenuTableCount")]
+        public IActionResult ActiveMenuTableCount()
+        {
+            return Ok(_menuTableService.TActiveMenuTableCount());
+        }
+        [HttpGet("PassiveMenuTableCount")]
+        public IActionResult PassiveMenuTableCount()
+        {
+            return Ok(_menuTableService.TPassiveMenuTableCount());
+        }
     }
 }

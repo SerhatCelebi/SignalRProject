@@ -46,7 +46,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
 
             if (result != null)
             {
-                return $"Product Name: {result.ProductName}, Price: {result.Price}";
+                return $"{result.ProductName} {result.Price:0.00}₺";
             }
 
             return "No product found with minimum price.";
@@ -63,7 +63,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
 
             if (result != null)
             {
-                return $"Product Name: {result.ProductName}, Price: {result.Price}";
+                return $"{result.ProductName} {result.Price:0.00}₺";
             }
 
             return "Ürün Bulunamadı.";

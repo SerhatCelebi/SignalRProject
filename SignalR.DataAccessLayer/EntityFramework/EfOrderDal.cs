@@ -38,7 +38,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
 
             if (result != null)
             {
-                return $"Table Name: {result.TableName}, Price: {result.Price}";
+                return $"{result.TableName} {result.Price}₺";
             }
 
             return "Son sipariş yok.";

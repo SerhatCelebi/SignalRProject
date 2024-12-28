@@ -1,0 +1,187 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+<div class="content">
+    <div class="container-fluid">
+        <script type="text/javascript">
+
+            $(document).ready(() => {
+
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7071/SignalRHub").build();
+
+
+
+
+                connection.start().then(() => {
+
+
+                    setInterval(() => {
+                        connection.invoke("SendProgress");
+
+
+                    }, 1000);
+
+                }).catch((err) => { console.log(err) });
+
+                connection.on("ReceiveTotalMoneyCaseAmount", (value) => {
+                    $("#totalmoneycaseamount").text(value);
+                });
+
+                connection.on("ReceiveTotalMoneyCaseAmount2", (value) => {
+                    const targetEarningBar = document.getElementById("targetEarningBar");
+                    const targetEarningHeader = document.getElementById("targetEarningHeader");
+                    let targetEarningRate = (value/10000) * 100;
+                    targetEarningHeader.innerText=(value + "/10000₺");
+                    targetEarningBar.style.width = `${targetEarningRate}%`;
+                    targetEarningBar.title = `${targetEarningRate}`;
+                    targetEarningBar.ariaValueNow = `${targetEarningRate}%`;
+                    targetEarningBar.setAttribute("data-original-title", `${targetEarningRate}%`);
+
+                });
+                connection.on("ReceiveTotalOrderCount", (value) => {
+                    const targetEarningBar = document.getElementById("targetOrderBar");
+                    const targetEarningHeader = document.getElementById("targetOrderHeader");
+                    let targetOrderRate = (value / 50) * 100;
+                    targetOrderHeader.innerText = (value + "/50");
+                    targetOrderBar.style.width = `${targetOrderRate}%`;
+                    targetOrderBar.title = `${targetOrderRate}`;
+                    targetOrderBar.ariaValueNow = `${targetOrderRate}%`;
+                    targetOrderBar.setAttribute("data-original-title", `${targetOrderRate}%`);
+                });
+                connection.on("ReceiveActiveOrderCount", (value) => {
+                    const targetActiveOrderBar = document.getElementById("targetActiveOrderBar");
+                    const targetActiveOrderHeader = document.getElementById("targetActiveOrderHeader");
+                    let targetActiveOrderRate = (value / 10) * 100;
+                    targetActiveOrderHeader.innerText = (value + "/10");
+                    targetActiveOrderBar.style.width = `${targetActiveOrderRate}%`;
+                    targetActiveOrderBar.title = `${targetActiveOrderRate}`;
+                    targetActiveOrderBar.ariaValueNow = `${targetActiveOrderRate}%`;
+                    targetActiveOrderBar.setAttribute("data-original-title", `${targetActiveOrderRate}%`);
+                });
+                connection.on("ReceiveMenuTableCount", (value) => {
+                    const targetMenuTableCountBar = document.getElementById("targetMenuTableCountBar");
+                    const targetMenuTableCountHeader = document.getElementById("targetMenuTableCountHeader");
+                    let targetMenuTableCountRate = (value / 20) * 100;
+                    targetMenuTableCountHeader.innerText = (value + "/20");
+                    targetMenuTableCountBar.style.width = `${targetMenuTableCountRate}%`;
+                    targetMenuTableCountBar.title = `${targetMenuTableCountRate}`;
+                    targetMenuTableCountBar.ariaValueNow = `${targetMenuTableCountRate}%`;
+                    targetMenuTableCountBar.setAttribute("data-original-title", `${targetMenuTableCountRate}%`);
+                });
+                connection.on("ReceiveActiveMenuTableCount", (value) => {
+                    $("#activemenutablecount").text(value);
+                });
+                connection.on("ReceivePassiveMenuTableCount", (value) => {
+                    $("#passivemenutablecount").text(value);
+                });
+
+            });
+        </script>
+        <h4 class="page-title">Admin İstatislikler</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row row-card-no-pd">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="fw-bold mt-1">Kasadaki Toplam Tutar:<b id="totalmoneycaseamount"></b></p>
+                                <h4><b id="totalmoneycaseamount"></b></h4>
+                                <a href="/Order/CreateOrder/" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> Yeni Sipariş</a>
+                            </div>
+                            <div class="card-footer">
+                                <ul class="nav">
+                                    <li class="nav-item"><a class="btn btn-default btn-link" href="/Order/Index/"><i class="la la-history"></i> Siparişler</a></li>
+                                    <li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="/ProgressBars/Index/"><i class="la la-refresh"></i> Sayfayı Yenile</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="progress-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="text-muted">Bugünkü Toplam Tutar</span>
+                                        <span class="text-muted fw-bold" id="targetEarningHeader"></span>
+                                    </div>
+                                    <div class="progress mb-2" style="height: 7px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%" id="targetEarningBar"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="text-muted">Siparişler</span>
+                                        <span class="text-muted fw-bold" id="targetOrderHeader"></span>
+                                    </div>
+                                    <div class="progress mb-2" style="height: 7px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%" id="targetOrderBar"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="text-muted">Aktif Sipariş</span>
+                                        <span class="text-muted fw-bold" id="targetActiveOrderHeader"></span>
+                                    </div>
+                                    <div class="progress mb-2" style="height: 7px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%" id="targetActiveOrderBar"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="text-muted">Masa Sayısı</span>
+                                        <span class="text-muted fw-bold" id="targetMenuTableCountHeader"></span>
+                                    </div>
+                                    <div class="progress mb-2" style="height: 7px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%" id="targetMenuTableCountBar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <p class="fw-bold mt-1">Masalar</p>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="la la-pie-chart text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 d-flex align-items-center">
+                                        <div class="numbers">
+                                            <p class="card-category">Aktif Masa Sayısı</p>
+                                            <h4 class="card-title" id="activemenutablecount"></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center">
+                                            <i class="la la-heart-o text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 d-flex align-items-center">
+                                        <div class="numbers">
+                                            <p class="card-category">Pasif Masa Sayısı</p>
+                                            <h4 class="card-title" id="passivemenutablecount"></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

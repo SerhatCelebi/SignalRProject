@@ -18,6 +18,11 @@ namespace SignalR.BusinessLayer.Concrete
             _menuTableDal = menuTableDal;
         }
 
+        public int TActiveMenuTableCount()
+        {
+            return _menuTableDal.ActiveMenuTableCount();
+        }
+
         public void TAdd(MenuTable entity)
         {
             throw new NotImplementedException();
@@ -41,6 +46,11 @@ namespace SignalR.BusinessLayer.Concrete
         public int TMenuTableCount()
         {
             return _menuTableDal.MenuTableCount();
+        }
+
+        public int TPassiveMenuTableCount()
+        {
+            return _menuTableDal.PassiveMenuTableCount();
         }
 
         public void TUpdate(MenuTable entity)
