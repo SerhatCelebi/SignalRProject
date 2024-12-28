@@ -38,10 +38,19 @@ namespace SignalR.DataAccessLayer.EntityFramework
 
             if (result != null)
             {
-                return $"Table Name: {result.TableName}, Price: {result.Price}";
+                return $"{result.TableName} {result.Price}₺";
             }
 
             return "Son sipariş yok.";
+        }
+
+        public decimal TodayTotalPrice()
+        {
+            using var context = new SignalRContext();
+            var today = DateTime.Now.Date;
+            return context.Orders
+                .Where(x => x.Date.Date == today)
+                .Sum(y => y.TotalPrice);
         }
 
         public int TotalOrderCount()

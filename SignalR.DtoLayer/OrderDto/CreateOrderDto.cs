@@ -11,6 +11,7 @@ namespace SignalR.DtoLayer.OrderDto
         
         public string TableNumber { get; set; }
         public string Description { get; set; }
+        
         public DateTime Date { get; set; }
         public decimal TotalPrice { get; set; }
         

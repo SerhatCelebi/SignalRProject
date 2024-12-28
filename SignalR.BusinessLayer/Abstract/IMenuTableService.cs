@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IOrderService : IGenericService<Order>
+    public interface IMenuTableService:IGenericService<MenuTable>
     {
-        int TTotalOrderCount();
-        int TActiveOrderCount();
-        string TLastOrder();
-        decimal TTodayTotalPrice();
+        int TMenuTableCount();
+        int TActiveMenuTableCount();
+        int TPassiveMenuTableCount();
+
     }
 }

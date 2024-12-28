@@ -58,5 +58,10 @@ namespace SignalR.BusinessLayer.Concrete
         {
             _orderDal.Update(entity);
         }
+
+        public decimal TTodayTotalPrice()
+        {
+            return _orderDal.TodayTotalPrice();
+        }
     }
 }
