@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface ICategoryService : IBasketService<Category>
     {
         public int TCategoryCount();
         public int TPassiveCategoryCount();

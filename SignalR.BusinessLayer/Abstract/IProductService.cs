@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IProductService:IGenericService<Product>
+    public interface IProductService:IBasketService<Product>
     {
         List<Product> TGetProductsWithCategories();
         public int TProductCount();
