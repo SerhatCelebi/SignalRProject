@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IAboutService:IBasketService<About>
+    public interface IAboutService: IGenericService<About>
     {
     }
 }

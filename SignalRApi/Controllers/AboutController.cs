@@ -20,7 +20,7 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult AboutList()
         {
-            var values=_aboutService.TGetListAll();
+            var values = _aboutService.TGetListAll();
             return Ok(values);
         }
         [HttpPost]
@@ -28,35 +28,38 @@ namespace SignalRApi.Controllers
         {
             About about = new About()
             {
-                Title=createAboutDto.Title,
-                Description=createAboutDto.Description,
-                ImageUrl=createAboutDto.ImageUrl,
+                Title = createAboutDto.Title,
+                Description = createAboutDto.Description,
+                ImageUrl = createAboutDto.ImageUrl,
             };
             _aboutService.TAdd(about);
             return Ok("Hakkında Kısmı Başarılı Bir Şekilde Eklendi.");
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteAbout(int id) {
-            var value=_aboutService.TGetByID(id);
+        public IActionResult DeleteAbout(int id)
+        {
+            var value = _aboutService.TGetByID(id);
             _aboutService.TDelete(value);
             return Ok("Hakkında Alanı Silindi");
         }
         [HttpPut]
-        public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto) {
+        public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
+        {
             About about = new About()
             {
-                AboutID=updateAboutDto.AboutID,
+                AboutID = updateAboutDto.AboutID,
                 Title = updateAboutDto.Title,
                 Description = updateAboutDto.Description,
                 ImageUrl = updateAboutDto.ImageUrl,
             };
             _aboutService.TUpdate(about);
-            return  Ok("Hakkımda Alanı Güncellendi");
+            return Ok("Hakkımda Alanı Güncellendi");
         }
         [HttpGet("{id}")]
-        public IActionResult GetAbout(int id) {
-            var value=_aboutService.TGetByID(id);
+        public IActionResult GetAbout(int id)
+        {
+            var value = _aboutService.TGetByID(id);
             return Ok(value);
-            }
+        }
     }
 }

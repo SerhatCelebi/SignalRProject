@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IBasketService:IBasketService<Basket>
+    public interface IBasketService: IGenericService<Basket>
     {
         List<Basket> TGetBasketByMenuTableNumber(int id);
     }

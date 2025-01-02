@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IOrderService : IBasketService<Order>
+    public interface IOrderService : IGenericService<Order>
     {
         int TTotalOrderCount();
         int TActiveOrderCount();

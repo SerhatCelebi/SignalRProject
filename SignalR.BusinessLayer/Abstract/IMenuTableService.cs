@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IMenuTableService:IBasketService<MenuTable>
+    public interface IMenuTableService: IGenericService<MenuTable>
     {
         int TMenuTableCount();
         int TActiveMenuTableCount();
