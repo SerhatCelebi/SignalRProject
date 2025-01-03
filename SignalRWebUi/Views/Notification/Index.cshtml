@@ -27,6 +27,8 @@
 									<th scope="col">Durum</th>
 									<th scope="col">Sil</th>
 									<th scope="col">Guncelle</th>
+									<th scope="col">Okundu İşaretle</th>
+									<th scope="col">Okunmadı İşaretle</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -40,6 +42,8 @@
 										<td>@item.Status</td>
 										<td><a href="/Notification/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger btn-rounded">Sil</a>	</td>
 										<td><a href="/Notification/UpdateNotification/@item.NotificationID" class="btn btn-outline-success btn-rounded">Güncelle</a>	</td>
+										<td><a href="/Notification/NotificationStatusChangeToTrue/@item.NotificationID" class="btn btn-outline-warning btn-rounded">Okundu</a>	</td>
+										<td><a href="/Notification/NotificationStatusChangeToFalse/@item.NotificationID" class="btn btn-outline-secondary btn-rounded">Okunmadı</a>	</td>
 
 									</tr>
 								}

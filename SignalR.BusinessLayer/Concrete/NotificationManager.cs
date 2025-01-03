@@ -18,6 +18,16 @@ namespace SignalR.BusinessLayer.Concrete
             _notificationDal = notificationDal;
         }
 
+        public void TNotificationStatusChangeToFalse(int id)
+        {
+            _notificationDal.NotificationStatusChangeToFalse(id);
+        }
+
+        public void TNotificationStatusChangeToTrue(int id)
+        {
+            _notificationDal.NotificationStatusChangeToTrue(id);
+        }
+
         public void TAdd(Notification entity)
         {
             _notificationDal.Add(entity);
