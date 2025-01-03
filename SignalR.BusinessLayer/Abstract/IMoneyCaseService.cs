@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface IMoneyCaseService:IBasketService<MoneyCase>
+    public interface IMoneyCaseService: IGenericService<MoneyCase>
     {
         decimal TTotalMoneyCaseAmount();
     }

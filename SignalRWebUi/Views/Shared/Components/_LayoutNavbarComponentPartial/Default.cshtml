@@ -1,4 +1,8 @@
-﻿<div class="main-header">
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<div class="main-header">
 	<div class="logo-header">
 		<a href="index.html" class="logo">
 			SignalR Yönetim
@@ -10,7 +14,49 @@
 	</div>
 	<nav class="navbar navbar-header navbar-expand-lg">
 		<div class="container-fluid">
+			<script type="text/javascript">
 
+				$(document).ready(() => {
+
+					var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7071/SignalRHub").build();
+					$("#connstatus").text(connection.state);
+
+
+
+					connection.start().then(() => {
+						$("#connstatus").text(connection.state);
+
+						setInterval(() => {
+							connection.invoke("SendNotification");
+
+
+						}, 1000);
+
+					}).catch((err) => { console.log(err) });
+
+
+
+					connection.on("ReceiveNotificationCountByFalse", (value) => {
+						$("#notificationcount").text(value);
+					});
+					connection.on("ReceiveNotificationListByFalse", (value) => {
+						console.log(value);
+						$("#notilist").empty();
+						for (var i = 0; i < value.length; i++) {
+							$("#notilist").append(`<a href="#">
+									<div class="${value[i].type}"><i class="${value[i].icon}"></i></div>
+									<div class="notif-content">
+									<span class="block">
+									${value[i].description}
+									</span>
+									<span class="time">${value[i].date}</span>
+									</div>
+									</a>
+									`)
+						};
+					});
+				});
+			</script>
 			<form class="navbar-left navbar-form nav-search mr-md-3" action="">
 				<div class="input-group">
 					<input type="text" placeholder="Ara ..." class="form-control">
@@ -36,52 +82,16 @@
 				<li class="nav-item dropdown hidden-caret">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="la la-bell"></i>
-						<span class="notification">3</span>
+						<span class="notification" id="notificationcount"></span>
 					</a>
 					<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
 						<li>
-							<div class="dropdown-title">4 yeni bildiriminiz var</div>
+							<div class="dropdown-title">Yeni bildirimleriniz var</div>
 						</li>
 						<li>
 							<div class="notif-center">
-								<a href="#">
-									<div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
-									<div class="notif-content">
-										<span class="block">
-											Yeni kullanıcı kaydoldu
-										</span>
-										<span class="time">5 dakika önce</span>
-									</div>
-								</a>
-								<a href="#">
-									<div class="notif-icon notif-success"> <i class="la la-comment"></i> </div>
-									<div class="notif-content">
-										<span class="block">
-											Rahmad, Yönetim hakkında yorum yaptı
-										</span>
-										<span class="time">12 dakika önce</span>
-									</div>
-								</a>
-								<a href="#">
-									<div class="notif-img">
-										<img src="~/Ready-Bootstrap-Dashboard-master/assets/img/profile2.jpg" alt="Profil Resmi">
-									</div>
-									<div class="notif-content">
-										<span class="block">
-											Reza size mesaj gönderdi
-										</span>
-										<span class="time">12 dakika önce</span>
-									</div>
-								</a>
-								<a href="#">
-									<div class="notif-icon notif-danger"> <i class="la la-heart"></i> </div>
-									<div class="notif-content">
-										<span class="block">
-											Farrah, Yönetimi beğendi
-										</span>
-										<span class="time">17 dakika önce</span>
-									</div>
-								</a>
+								
+								<div id="notilist"></div>
 							</div>
 						</li>
 						<li>

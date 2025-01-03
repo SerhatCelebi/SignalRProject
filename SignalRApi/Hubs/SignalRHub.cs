@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.DataProtection.XmlEncryption;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
+using System.Runtime.CompilerServices;
 
 namespace SignalRApi.Hubs
 {
@@ -11,16 +13,21 @@ namespace SignalRApi.Hubs
         private readonly IOrderService _orderService;
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly IMenuTableService _menuTableService;
+        private readonly IBookingService _bookingService;
+        private readonly INotificationService _notificationService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService,IOrderService orderService
-            , IMoneyCaseService moneyCaseService, IMenuTableService menuTableService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService
+            , IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
         {
             _categoryService = categoryService;
             _productService = productService;
             _orderService = orderService;
             _moneyCaseService = moneyCaseService;
             _menuTableService = menuTableService;
+            _bookingService = bookingService;
+            _notificationService = notificationService;
         }
+        public static int clientCount { get; set; } = 0;
 
         public async Task SendStatistic()
         {
@@ -91,6 +98,41 @@ namespace SignalRApi.Hubs
 
 
         }
-       
+        public async Task GetBookingList()
+        {
+            var values=_bookingService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveBookingList",values);
+
+        }
+        public async Task SendNotification()
+        {
+            var value=_notificationService.TNotificationCountByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationCountByFalse",value);
+
+            var values=_notificationService.TGetAllNotificationByFalse();
+            await Clients.All.SendAsync("ReceiveNotificationListByFalse",values);
+
+        }
+        public async Task GetMenuTableStatus()
+        {
+            var value = _menuTableService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveMenuTableStatus", value);
+        }
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+        public override async Task OnConnectedAsync()
+        {
+            clientCount++;
+            await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+            await base.OnConnectedAsync();
+        }
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            clientCount--;
+            await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+            await base.OnDisconnectedAsync(exception);
+        }
     }
 }
