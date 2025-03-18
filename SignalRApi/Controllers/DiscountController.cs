@@ -31,6 +31,7 @@ namespace SignalRApi.Controllers
         {
             Discount discount = new Discount()
             {
+                Status=false,
                 Amount = createDiscountDto.Amount,
                 Description = createDiscountDto.Description,
                 ImageUrl = createDiscountDto.ImageUrl,
@@ -51,6 +52,7 @@ namespace SignalRApi.Controllers
         {
             Discount discount = new Discount()
             {
+                Status=false,
                 DiscountID=updateDiscountDto.DiscountID,
                 Amount = updateDiscountDto.Amount,
                 Description = updateDiscountDto.Description,
@@ -65,6 +67,11 @@ namespace SignalRApi.Controllers
         {
             var value = _discountService.TGetByID(id);
             return Ok(value);
+        }
+        [HttpGet("ChangeStatus/{id}")]
+        public IActionResult ChangeStatus(int id) { 
+            _discountService.TChangeStatus(id);
+            return Ok("Ürün indirimi güncellendi");
         }
     }
 }
