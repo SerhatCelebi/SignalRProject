@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SignalRWebUi.Controllers
+namespace SignalRWebUI.Controllers
 {
     public class MessageController : Controller
     {
@@ -8,7 +8,8 @@ namespace SignalRWebUi.Controllers
         {
             return View();
         }
-        public IActionResult ClientUserCount()
+
+        public IActionResult CLientUserCount()
         {
             return View();
         }

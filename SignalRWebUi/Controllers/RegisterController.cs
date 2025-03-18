@@ -1,36 +1,39 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.EntityLayer.Entities;
-using SignalRWebUi.Dtos.IdentityDtos;
+using SignalRWebUI.Dtos.IdentityDtos;
 
-namespace SignalRWebUi.Controllers
+namespace SignalRWebUI.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly UserManager<AppUser>_userManager;
+        private readonly UserManager<AppUser> _userManager;
         public RegisterController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Index(RegisterDto registerDto)
+        public async Task< IActionResult> Index(RegisterDto registerDto)
         {
-            var appUser=new AppUser()
+            var appUser = new AppUser()
             {
-                Name=registerDto.Name,
-                Surname=registerDto.Surname,
-                Email=registerDto.Mail,
-                UserName=registerDto.Username, 
+                Name = registerDto.Name,
+                Surname = registerDto.Surname,
+                Email = registerDto.Mail,
+                UserName = registerDto.Username
             };
-            var result=await _userManager.CreateAsync(appUser,registerDto.Password);
+            var result = await _userManager.CreateAsync(appUser, registerDto.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index","Login");
+                return RedirectToAction("Index", "Login");
             }
             return View();
         }

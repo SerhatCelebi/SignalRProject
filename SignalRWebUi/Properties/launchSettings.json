@@ -3,16 +3,16 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:8418",
-      "sslPort": 44382
+      "applicationUrl": "http://localhost:12630",
+      "sslPort": 44305
     }
   },
   "profiles": {
-    "SignalRWebUi": {
+    "SignalRWebUI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7024;http://localhost:5092",
+      "applicationUrl": "https://localhost:7092;http://localhost:5173",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SignalR.DtoLayer.AboutDto;
-using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 
 namespace SignalRApi.Mapping
 {
@@ -9,9 +9,9 @@ namespace SignalRApi.Mapping
         public AboutMapping()
         {
             CreateMap<About, ResultAboutDto>().ReverseMap();
-            CreateMap<About, CreateAboutDto>().ReverseMap();
-            CreateMap<About, GetAboutDto>().ReverseMap();
-            CreateMap<About, UpdateAboutDto>().ReverseMap();
+            CreateMap<About,CreateAboutDto>().ReverseMap();
+            CreateMap<About,GetAboutDto>().ReverseMap();
+            CreateMap<About,UpdateAboutDto>().ReverseMap();
         }
     }
 }

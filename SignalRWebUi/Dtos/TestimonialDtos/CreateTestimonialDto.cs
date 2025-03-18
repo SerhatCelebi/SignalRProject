@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalRWebUi.Dtos.TestimonialDtos
+namespace SignalRWebUI.Dtos.TestimonialDtos
 {
     public class CreateTestimonialDto
     {
-        
         public string Name { get; set; }
         public string Title { get; set; }
         public string Comment { get; set; }

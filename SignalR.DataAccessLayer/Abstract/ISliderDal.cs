@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.DataAccessLayer.Abstract
 {
-	public interface ISliderDal:IGenericDal<Slider>
-	{
-	}
+    public interface ISliderDal : IGenericDal<Slider>
+    {
+    }
 }

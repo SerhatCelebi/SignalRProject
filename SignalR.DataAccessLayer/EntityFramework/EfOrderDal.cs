@@ -2,6 +2,7 @@
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.Repositories;
 using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,38 +20,18 @@ namespace SignalR.DataAccessLayer.EntityFramework
         public int ActiveOrderCount()
         {
             using var context = new SignalRContext();
-            return context.Orders.Where(x => x.Description == "Müsteri Masada").Count();
+            return context.Orders.Where(x => x.Description == "Müşteri Masada").Count();
         }
 
-        public string LastOrder()
+        public decimal LastOrderPrice()
         {
             using var context = new SignalRContext();
-
-            var result = context.Orders
-                .OrderByDescending(x => x.OrderID)
-                .Take(1)
-                .Select(y => new
-                {
-                    TableName = y.TableNumber.ToString(),
-                    Price = y.TotalPrice.ToString()
-                })
-                .FirstOrDefault();
-
-            if (result != null)
-            {
-                return $"{result.TableName} {result.Price}₺";
-            }
-
-            return "Son sipariş yok.";
+            return context.Orders.OrderByDescending(x => x.OrderID).Take(1).Select(y=>y.TotalPrice).FirstOrDefault();
         }
 
         public decimal TodayTotalPrice()
         {
-            using var context = new SignalRContext();
-            var today = DateTime.Now.Date;
-            return context.Orders
-                .Where(x => x.Date.Date == today)
-                .Sum(y => y.TotalPrice);
+            return 0;
         }
 
         public int TotalOrderCount()

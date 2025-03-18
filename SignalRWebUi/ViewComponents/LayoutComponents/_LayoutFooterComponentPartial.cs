@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SignalRWebUi.ViewComponents.LayoutComponents
+namespace SignalRWebUI.ViewComponents.LayoutComponents
 {
-    public class _LayoutFooterComponentPartial : ViewComponent
-    {
-        public IViewComponentResult Invoke()
-        {
-            return View();
-        }
-    }
+	public class _LayoutFooterComponentPartial:ViewComponent
+	{
+		public IViewComponentResult Invoke()
+		{
+			return View();
+		}
+	}
 }

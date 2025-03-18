@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalRWebUI.Dtos.ContactDtos;
 
-using SignalRWebUi.Dtos.ContactDtos;
-
-
-namespace SignalRWebUi.ViewComponents.UILayoutComponents
+namespace SignalRWebUI.ViewComponents.UILayoutComponents
 {
     public class _UILayoutFooterComponentPartial:ViewComponent
     {
@@ -13,19 +11,13 @@ namespace SignalRWebUi.ViewComponents.UILayoutComponents
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var respongeMessage = await client.GetAsync("https://localhost:7071/api/Contact");
-
-
-            var jsonData = await respongeMessage.Content.ReadAsStringAsync();
+            var responseMessage = await client.GetAsync("https://localhost:7186/api/Contact");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultContactDto>>(jsonData);
             return View(values);
-
-
-
         }
     }
 }

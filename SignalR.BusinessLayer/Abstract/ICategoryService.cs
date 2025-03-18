@@ -1,4 +1,4 @@
-﻿using SignalR.EntityLayer.Entities;
+﻿using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface ICategoryService:IGenericService<Category>
     {
-        public int TCategoryCount();
-        public int TPassiveCategoryCount();
-        public int TActiveCategoryCount();
-        
+        int TCategoryCount();
+        int TActiveCategoryCount();
+        int TPassiveCategoryCount();
     }
 }

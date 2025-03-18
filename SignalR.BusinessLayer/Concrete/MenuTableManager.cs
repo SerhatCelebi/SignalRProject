@@ -12,20 +12,24 @@ namespace SignalR.BusinessLayer.Concrete
     public class MenuTableManager : IMenuTableService
     {
         private readonly IMenuTableDal _menuTableDal;
-
         public MenuTableManager(IMenuTableDal menuTableDal)
         {
             _menuTableDal = menuTableDal;
         }
 
-        public int TActiveMenuTableCount()
-        {
-            return _menuTableDal.ActiveMenuTableCount();
-        }
-
         public void TAdd(MenuTable entity)
         {
             _menuTableDal.Add(entity);
+        }
+
+        public void TChangeMenuTableStatusToFalse(int id)
+        {
+            _menuTableDal.ChangeMenuTableStatusToFalse(id);
+        }
+
+        public void TChangeMenuTableStatusToTrue(int id)
+        {
+            _menuTableDal.ChangeMenuTableStatusToTrue(id);
         }
 
         public void TDelete(MenuTable entity)
@@ -46,11 +50,6 @@ namespace SignalR.BusinessLayer.Concrete
         public int TMenuTableCount()
         {
             return _menuTableDal.MenuTableCount();
-        }
-
-        public int TPassiveMenuTableCount()
-        {
-            return _menuTableDal.PassiveMenuTableCount();
         }
 
         public void TUpdate(MenuTable entity)

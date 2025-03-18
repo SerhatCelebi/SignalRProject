@@ -13,9 +13,9 @@ namespace SignalR.BusinessLayer.Concrete
     {
         private readonly IMoneyCaseDal _moneyCaseDal;
 
-        public MoneyCaseManager(IMoneyCaseDal moneycaseDal)
+        public MoneyCaseManager(IMoneyCaseDal moneyCaseDal)
         {
-            _moneyCaseDal = moneycaseDal;
+            _moneyCaseDal = moneyCaseDal;
         }
 
         public void TAdd(MoneyCase entity)

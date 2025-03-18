@@ -12,15 +12,9 @@ namespace SignalR.BusinessLayer.Concrete
     public class OrderManager : IOrderService
     {
         private readonly IOrderDal _orderDal;
-
         public OrderManager(IOrderDal orderDal)
         {
             _orderDal = orderDal;
-        }
-
-        public string TLastOrder()
-        {
-            return _orderDal.LastOrder();
         }
 
         public int TActiveOrderCount()
@@ -30,38 +24,42 @@ namespace SignalR.BusinessLayer.Concrete
 
         public void TAdd(Order entity)
         {
-            _orderDal.Add(entity);
+            throw new NotImplementedException();
         }
 
         public void TDelete(Order entity)
         {
-           _orderDal.Delete(entity);
+            throw new NotImplementedException();
         }
 
         public Order TGetByID(int id)
         {
-            return _orderDal.GetByID(id);
+            throw new NotImplementedException();
         }
 
         public List<Order> TGetListAll()
         {
-            return _orderDal.GetListAll();
+            throw new NotImplementedException();
         }
 
-        public int TTotalOrderCount()
+        public decimal TLastOrderPrice()
         {
-            return _orderDal.TotalOrderCount();
-           
-        }
-
-        public void TUpdate(Order entity)
-        {
-            _orderDal.Update(entity);
+            return _orderDal.LastOrderPrice();
         }
 
         public decimal TTodayTotalPrice()
         {
             return _orderDal.TodayTotalPrice();
+        }
+
+        public int TTotalOrderCount()
+        {
+            return _orderDal.TotalOrderCount();
+        }
+
+        public void TUpdate(Order entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -12,12 +12,10 @@ namespace SignalR.BusinessLayer.Concrete
     public class ContactManager : IContactService
     {
         private readonly IContactDal _contactDal;
-
         public ContactManager(IContactDal contactDal)
         {
             _contactDal = contactDal;
         }
-
         public void TAdd(Contact entity)
         {
             _contactDal.Add(entity);
@@ -30,7 +28,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public Contact TGetByID(int id)
         {
-           return _contactDal.GetByID(id);
+            return _contactDal.GetByID(id);
         }
 
         public List<Contact> TGetListAll()

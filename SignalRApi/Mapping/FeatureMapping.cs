@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SignalR.DtoLayer.FeatureDto;
-using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 
 namespace SignalRApi.Mapping
 {
@@ -8,11 +8,10 @@ namespace SignalRApi.Mapping
     {
         public FeatureMapping()
         {
-            CreateMap<Feature, GetFeatureDto>().ReverseMap();
-            CreateMap<Feature, CreateFeatureDto>().ReverseMap();
             CreateMap<Feature, ResultFeatureDto>().ReverseMap();
+            CreateMap<Feature, CreateFeatureDto>().ReverseMap();
             CreateMap<Feature, UpdateFeatureDto>().ReverseMap();
-
+            CreateMap<Feature, GetFeatureDto>().ReverseMap();
         }
     }
 }

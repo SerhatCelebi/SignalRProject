@@ -1,6 +1,6 @@
 ﻿using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
-using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,6 @@ namespace SignalR.BusinessLayer.Concrete
     public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal _categoryDal;
-
         public CategoryManager(ICategoryDal categoryDal)
         {
             _categoryDal = categoryDal;
@@ -35,7 +34,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public void TDelete(Category entity)
         {
-            _categoryDal.Delete(entity);
+           _categoryDal.Delete(entity);
         }
 
         public Category TGetByID(int id)
@@ -52,7 +51,6 @@ namespace SignalR.BusinessLayer.Concrete
         {
             return _categoryDal.PassiveCategoryCount();
         }
-
 
         public void TUpdate(Category entity)
         {
