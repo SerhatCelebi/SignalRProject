@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalRWebUi.Dtos.BookingDtos
+namespace SignalRWebUI.Dtos.BookingDtos
 {
     public class GetBookingDto
     {

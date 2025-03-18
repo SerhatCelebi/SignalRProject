@@ -7,16 +7,17 @@
 
 <div class="content">
 	<div class="container-fluid">
-		<h4 class="page-title">İndirim İşlemleri</h4>
+		<h4 class="page-title">Günün İndirimleri İşlemleri</h4>
 		<div class="row">
 			<div class="col-md-12">
+
 				<div class="card">
 					<div class="card-header">
-						<div class="card-title">İndirim Listesi</div>
+						<div class="card-title">Günün İndirimleri Listesi</div>
 					</div>
 					<div class="card-body">
 						<div class="card-sub">
-							Lütfen tek seferde sadece <strong>2 adet</strong> indirimi aktif edin!
+                            Günün İndirimli Ürünleri Aşağıda Yer Almaktadır. Tema Bütünlüğü İçin <strong>2 Adet</strong> İndirimli Ürün Seçiniz.
 						</div>
 						<table class="table mt-3">
 							<thead>
@@ -25,9 +26,10 @@
 									<th scope="col">Ürün</th>
 									<th scope="col">İndirim Oranı</th>
 									<th scope="col">Durum</th>
-									<th scope="col">Durumu Değiştir</th>
 									<th scope="col">Sil</th>
-									<th scope="col">Guncelle</th>
+									<th scope="col">Güncelle</th>
+									<th scope="col">Aktif Yap</th>
+									<th scope="col">Pasif Yap</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -35,28 +37,23 @@
 								{
 									count++;
 									<tr>
-										<td>@count</td>
+										<th>@count</th>
 										<td>@item.Title</td>
 										<td>@item.Amount</td>
 										<td>@item.Status</td>
-										<td><a href="/Discount/ChangeStatus/@item.DiscountID" class="btn btn-outline-warning btn-rounded">Durumu Değiştir</a>	</td>
-										<td><a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-danger btn-rounded">Sil</a>	</td>
-										<td><a href="/Discount/UpdateDiscount/@item.DiscountID" class="btn btn-outline-success btn-rounded">Güncelle</a>	</td>
+										<td><a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-danger">Sil</a></td>
+										<td><a href="/Discount/UpdateDiscount/@item.DiscountID" class="btn btn-outline-success">Güncelle</a></td>
+										<td><a href="/Discount/ChangeStatusToTrue/@item.DiscountID" class="btn btn-outline-warning">Aktif Yap</a></td>
+										<td><a href="/Discount/ChangeStatusToFalse/@item.DiscountID" class="btn btn-outline-dark">Pasif Yap</a></td>
 
 									</tr>
 								}
-
-
 							</tbody>
 						</table>
-						<a href="/Discount/CreateDiscount/" class="btn btn-outline-primary btn-rounded">Yeni İndirim Oluştur</a>
+						<a href="/Discount/CreateDiscount/" class="btn btn-outline-primary">Yeni İndirimli Ürün Girişi</a>
 					</div>
 				</div>
-
-
 			</div>
-
 		</div>
 	</div>
 </div>
-

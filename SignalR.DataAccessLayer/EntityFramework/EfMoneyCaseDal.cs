@@ -2,6 +2,7 @@
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.Repositories;
 using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,12 @@ namespace SignalR.DataAccessLayer.EntityFramework
     {
         public EfMoneyCaseDal(SignalRContext context) : base(context)
         {
-
         }
 
         public decimal TotalMoneyCaseAmount()
         {
             using var context = new SignalRContext();
-            return context.MoneyCases.Select(x=>x.TotalAmount).FirstOrDefault();
+            return context.MoneyCases.Select(x => x.TotalAmount).FirstOrDefault();
         }
     }
 }

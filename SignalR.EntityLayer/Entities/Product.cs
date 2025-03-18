@@ -1,4 +1,6 @@
-﻿namespace SignalR.EntityLayer.Entities
+﻿using SignalR.EntityLayer.Entities;
+
+namespace SignalR.EntiyLayer.Entities
 {
     public class Product
     {

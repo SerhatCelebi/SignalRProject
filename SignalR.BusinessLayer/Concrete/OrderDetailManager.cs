@@ -12,7 +12,6 @@ namespace SignalR.BusinessLayer.Concrete
     public class OrderDetailManager : IOrderDetailService
     {
         private readonly IOrderDetailDal _orderDetailDal;
-
         public OrderDetailManager(IOrderDetailDal orderDetailDal)
         {
             _orderDetailDal = orderDetailDal;
@@ -20,27 +19,27 @@ namespace SignalR.BusinessLayer.Concrete
 
         public void TAdd(OrderDetail entity)
         {
-            _orderDetailDal.Add(entity);
+            throw new NotImplementedException();
         }
 
         public void TDelete(OrderDetail entity)
         {
-            _orderDetailDal.Delete(entity);
+            throw new NotImplementedException();
         }
 
         public OrderDetail TGetByID(int id)
         {
-            return _orderDetailDal.GetByID(id);
+            throw new NotImplementedException();
         }
 
         public List<OrderDetail> TGetListAll()
         {
-            return _orderDetailDal.GetListAll();
+            throw new NotImplementedException();
         }
 
         public void TUpdate(OrderDetail entity)
         {
-            _orderDetailDal.Update(entity);
+            throw new NotImplementedException();
         }
     }
 }

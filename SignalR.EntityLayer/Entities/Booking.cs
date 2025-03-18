@@ -1,8 +1,7 @@
-﻿namespace SignalR.EntityLayer.Entities
+﻿namespace SignalR.EntiyLayer.Entities
 {
     public class Booking
     {
-        
         public int BookingID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

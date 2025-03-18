@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalRWebUi.Dtos.BookingDtos
+namespace SignalRWebUI.Dtos.BookingDtos
 {
     public class CreateBookingDto
     {
@@ -13,6 +13,6 @@ namespace SignalRWebUi.Dtos.BookingDtos
         public string Mail { get; set; }
         public int PersonCount { get; set; }
         public DateTime Date { get; set; }
-        public string Description { get; set; }
-    }
+		public string Description { get; set; }
+	}
 }

@@ -1,4 +1,5 @@
 ﻿@model LoginDto
+
 @{
     Layout = null;
 }
@@ -19,20 +20,18 @@
 	<div class="page-content">
 		<div class="form-v6-content">
 			<div class="form-left">
-				<img src="~/colorlib-regform-32/images/Pizza1.jpg" alt="form" style="width:484px;height:584px">
+				<img src="~/colorlib-regform-32/images/Sauce1.jpg" alt="form" style="width:484px; height:584px">
 			</div>
 			<form class="form-detail" method="post">
 				<h2>Giriş Formu</h2>
 				<div class="form-row">
-					<input type="text" id="full-name" class="input-text" placeholder="Kullanıcı Adınız" required asp-for="Username">
+					<input type="text" id="full-name" asp-for="Username" class="input-text" placeholder="Kullanıcı Adınız" required>
 				</div>
 				<div class="form-row">
-					<input type="password" id="password" class="input-text" placeholder="Şifreniz" required asp-for="Password">
+					<input type="password" id="password" class="input-text" placeholder="Şifreniz" asp-for="Password" required>
 				</div>
 
-				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Giriş Yap">
-				</div>
+				<button class="btn btn-dark">Giriş Yap</button>
 			</form>
 		</div>
 	</div>

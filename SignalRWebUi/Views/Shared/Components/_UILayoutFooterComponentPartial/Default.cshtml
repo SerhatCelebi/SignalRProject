@@ -1,10 +1,7 @@
 ﻿@model List<ResultContactDto>
-
-    
+@foreach(var item in Model){
 <footer class="footer_section">
     <div class="container">
-        @foreach (var item in Model)
-        {
         <div class="row">
             <div class="col-md-4 footer-col">
                 <div class="footer_contact">
@@ -15,7 +12,7 @@
                         <a href="@item.Location">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                             <span>
-                                Konum
+                                Lokasyon
                             </span>
                         </a>
                         <a href="">
@@ -39,25 +36,9 @@
                         @item.FooterTitle
                     </a>
                     <p>
-                       @item.FooterDescription
+                        @item.FooterDescription
                     </p>
-                    <div class="footer_social">
-                        <a href="">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-pinterest" aria-hidden="true"></i>
-                        </a>
-                    </div>
+                        @await Component.InvokeAsync("_UILayoutSocialMediaComponentPartial")
                 </div>
             </div>
             <div class="col-md-4 footer-col">
@@ -74,13 +55,12 @@
         </div>
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> Tüm Hakları Saklıdır
+                &copy; <span id="displayYear"></span> Tüm Hakları Saklıdır.
                 <a href="https://html.design/">SignalR Restoran</a><br><br>
                 &copy; <span id="displayYear"></span> Geliştiren
-                <a href="https://themewagon.com/" target="_blank">Serhat</a>
+                <a href="https://themewagon.com/" target="_blank">M&Y Yazılım Eğitim Akademi</a>
             </p>
         </div>
-        }
     </div>
 </footer>
-
+}

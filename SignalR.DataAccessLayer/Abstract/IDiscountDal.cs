@@ -1,4 +1,4 @@
-﻿using SignalR.EntityLayer.Entities;
+﻿using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace SignalR.DataAccessLayer.Abstract
 {
-    public interface IDiscountDal:IGenericDal<Discount>
+    public interface IDiscountDal : IGenericDal<Discount>
     {
-        void ChangeStatus(int id);
+        void ChangeStatusToTrue(int id);
+        void ChangeStatusToFalse(int id);
+        List<Discount> GetListByStatusTrue();
     }
 }

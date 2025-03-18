@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.SocialMediaDto;
+using SignalR.DtoLayer.TestimonialDto;
 using SignalR.EntityLayer.Entities;
-using System.Reflection;
 
 namespace SignalRApi.Controllers
 {
@@ -12,57 +12,46 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class SocialMediaController : ControllerBase
     {
-        private readonly ISocialMediaService _socialmediaService;
+        private readonly ISocialMediaService _socialMediaService;
         private readonly IMapper _mapper;
-
-        public SocialMediaController(ISocialMediaService socialmediaService,IMapper mapper)
+        public SocialMediaController(ISocialMediaService socialMediaService, IMapper mapper)
         {
-            _socialmediaService = socialmediaService;
+            _socialMediaService = socialMediaService;
             _mapper = mapper;
         }
+
         [HttpGet]
         public IActionResult SocialMediaList()
         {
-            var values =_mapper.Map<List<ResultSocialMediaDto>>(_socialmediaService.TGetListAll());
-            return Ok(values);
+            var value = _mapper.Map<List<ResultSocialMediaDto>>(_socialMediaService.TGetListAll());
+            return Ok(value);
         }
         [HttpPost]
         public IActionResult CreateSocialMedia(CreateSocialMediaDto createSocialMediaDto)
         {
-            SocialMedia socialmedia = new SocialMedia()
-            {
-                Icon = createSocialMediaDto.Icon,
-                Title = createSocialMediaDto.Title,
-                Url = createSocialMediaDto.Url,
-            };
-            _socialmediaService.TAdd(socialmedia);
-            return Ok("SocialMedia Kısmı Başarılı Bir Şekilde Eklendi.");
+            var value = _mapper.Map<SocialMedia>(createSocialMediaDto);
+            _socialMediaService.TAdd(value);
+            return Ok("Sosyal Medya Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteSocialMedia(int id)
         {
-            var value = _socialmediaService.TGetByID(id);
-            _socialmediaService.TDelete(value);
-            return Ok("SocialMedia Alanı Silindi");
-        }
-        [HttpPut]
-        public IActionResult UpdateSocialMedia(UpdateSocialMediaDto updateSocialMediaDto)
-        {
-            SocialMedia socialmedia = new SocialMedia()
-            {
-                SocialMediaID=updateSocialMediaDto.SocialMediaID,
-                Icon = updateSocialMediaDto.Icon,
-                Title = updateSocialMediaDto.Title,
-                Url = updateSocialMediaDto.Url,
-            };
-            _socialmediaService.TUpdate(socialmedia);
-            return Ok("SocialMedia Alanı Güncellendi");
+            var value = _socialMediaService.TGetByID(id);
+            _socialMediaService.TDelete(value);
+            return Ok("Sosyal Medya Bilgisi Silindi");
         }
         [HttpGet("{id}")]
         public IActionResult GetSocialMedia(int id)
         {
-            var value = _socialmediaService.TGetByID(id);
-            return Ok(value);
+            var value = _socialMediaService.TGetByID(id);
+            return Ok(_mapper.Map<GetSocialMediaDto>(value));
+        }
+        [HttpPut]
+        public IActionResult UpdateSocialMedia(UpdateSocialMediaDto updateSocialMediaDto)
+        {
+            var value = _mapper.Map<SocialMedia>(updateSocialMediaDto);
+            _socialMediaService.TUpdate(value);
+            return Ok("Sosyal Medya Bilgisi Güncellendi");
         }
     }
 }

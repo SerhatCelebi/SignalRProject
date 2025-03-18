@@ -14,7 +14,8 @@ namespace SignalRApi.Controllers
         {
             _moneyCaseService = moneyCaseService;
         }
-        [HttpGet("TotalMoneyCaseAmount")]
+
+        [HttpGet]
         public IActionResult TotalMoneyCaseAmount()
         {
             return Ok(_moneyCaseService.TTotalMoneyCaseAmount());

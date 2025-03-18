@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalRWebUi.Dtos.AboutDtos;
-using SignalRWebUi.Dtos.SliderDtos;
+using SignalRWebUI.Dtos.AboutDtos;
+using SignalRWebUI.Dtos.SliderDtos;
 
-namespace SignalRWebUi.ViewComponents.DefaultComponents
+namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
     public class _DefaultAboutComponentPartial:ViewComponent
     {
@@ -12,19 +12,13 @@ namespace SignalRWebUi.ViewComponents.DefaultComponents
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var respongeMessage = await client.GetAsync("https://localhost:7071/api/About");
-
-
-            var jsonData = await respongeMessage.Content.ReadAsStringAsync();
+            var responseMessage = await client.GetAsync("https://localhost:7186/api/About");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
             return View(values);
-
-
-
         }
     }
 }

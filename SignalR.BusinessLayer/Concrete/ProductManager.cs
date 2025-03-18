@@ -1,6 +1,6 @@
 ﻿using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
-using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +12,25 @@ namespace SignalR.BusinessLayer.Concrete
     public class ProductManager : IProductService
     {
         private readonly IProductDal _productDal;
+
         public ProductManager(IProductDal productDal)
         {
             _productDal = productDal;
-            
         }
 
-        public string TProductByMaxPrice()
+        public string TProductNameByMaxPrice()
         {
-            return _productDal.ProductByMaxPrice();
+            return _productDal.ProductNameByMaxPrice();
         }
 
-        public string TProductByMinPrice()
+        public string TProductNameByMinPrice()
         {
-            return _productDal.ProductByMinPrice();
+            return _productDal.ProductNameByMinPrice();
         }
 
         public void TAdd(Product entity)
         {
-           _productDal.Add(entity);
+            _productDal.Add(entity);
         }
 
         public void TDelete(Product entity)
@@ -50,7 +50,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public List<Product> TGetProductsWithCategories()
         {
-            return _productDal.GetProductsWithCategories();
+          return _productDal.GetProductsWithCategories();
         }
 
         public int TProductCount()
@@ -68,19 +68,39 @@ namespace SignalR.BusinessLayer.Concrete
             return _productDal.ProductCountByCategoryNameHamburger();
         }
 
-        public decimal TProductPriveAvg()
+        public decimal TProductPriceAvg()
         {
             return _productDal.ProductPriceAvg();
         }
 
         public void TUpdate(Product entity)
         {
-            _productDal.Update(entity);
+           _productDal.Update(entity);
         }
 
-        public decimal TProductAvgPriceByCategoryNameHamburger()
+        public decimal TProductAvgPriceByHamburger()
         {
-            return _productDal.ProductAvgPriceByCategoryNameHamburger();
+            return _productDal.ProductAvgPriceByHamburger();
         }
-    }
+
+        public decimal TProductPriceBySteakBurger()
+        {
+            return _productDal.ProductPriceBySteakBurger();
+        }
+
+        public decimal TTotalPriceByDrinkCategory()
+        {
+           return _productDal.TotalPriceByDrinkCategory();
+        }
+
+        public decimal TTotalPriceBySaladCategory()
+        {
+            return _productDal.TotalPriceBySaladCategory();
+        }
+
+		public List<Product> TGetLast9Products()
+		{
+			return _productDal.GetLast9Products();
+		}
+	}
 }

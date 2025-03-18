@@ -1,4 +1,4 @@
-﻿var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7071/SignalRHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7186/SignalRHub").build();
 document.getElementById("sendbutton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {

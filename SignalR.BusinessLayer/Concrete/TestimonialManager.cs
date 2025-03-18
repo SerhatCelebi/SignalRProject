@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Concrete
 {
-    public class TestimonialManager : ITestimonialService
+    public class TestimonialManager : ITestoimonialService
     {
         private readonly ITestimonialDal _testimonialDal;
+
         public TestimonialManager(ITestimonialDal testimonialDal)
         {
             _testimonialDal = testimonialDal;
         }
+
         public void TAdd(Testimonial entity)
         {
             _testimonialDal.Add(entity);
@@ -28,7 +30,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public Testimonial TGetByID(int id)
         {
-           return _testimonialDal.GetByID(id);
+            return _testimonialDal.GetByID(id);
         }
 
         public List<Testimonial> TGetListAll()

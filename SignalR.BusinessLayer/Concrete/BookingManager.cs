@@ -1,6 +1,6 @@
 ﻿using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
-using SignalR.EntityLayer.Entities;
+using SignalR.EntiyLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +18,19 @@ namespace SignalR.BusinessLayer.Concrete
             _bookingDal = bookingDal;
         }
 
-        public void TAdd(Booking entity)
+		public void BookingStatusApproved(int id)
+		{
+            _bookingDal.BookingStatusApproved(id);
+		}
+
+		public void BookingStatusCancelled(int id)
+		{
+            _bookingDal.BookingStatusCancelled(id);
+		}
+
+		public void TAdd(Booking entity)
         {
             _bookingDal.Add(entity);
-        }
-
-        public void TBookingStatusApproved(int id)
-        {
-            _bookingDal.BookingStatusApproved(id);
-        }
-
-        public void TBookingStatusCanceled(int id)
-        {
-            _bookingDal.BookingStatusCanceled(id);
         }
 
         public void TDelete(Booking entity)
@@ -40,7 +40,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public Booking TGetByID(int id)
         {
-           return _bookingDal.GetByID(id);
+            return _bookingDal.GetByID(id);
         }
 
         public List<Booking> TGetListAll()
