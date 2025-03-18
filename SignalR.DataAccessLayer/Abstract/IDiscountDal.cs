@@ -9,5 +9,6 @@ namespace SignalR.DataAccessLayer.Abstract
 {
     public interface IDiscountDal:IGenericDal<Discount>
     {
+        void ChangeStatus(int id);
     }
 }

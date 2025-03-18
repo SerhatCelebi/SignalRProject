@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 using Newtonsoft.Json;
 using SignalRWebUi.Dtos.DiscountDtos;
 using System.Text;
@@ -79,5 +80,11 @@ namespace SignalRWebUi.Controllers
 			}
 			return View();
 		}
-	}
+        public async Task<IActionResult> ChangeStatus(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7071/api/Discount/ChangeStatus/{id}");
+            return RedirectToAction("Index");
+        }
+    }
 }
